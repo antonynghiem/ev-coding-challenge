@@ -2,6 +2,7 @@ import { Property } from "@/interfaces/Property";
 import { Card, CardBody, Stack, Text, HStack, Box, StackDivider, SimpleGrid } from "@chakra-ui/react";
 import Image from "next/image";
 import { FC } from "react";
+import { DeletePropertyButton } from "../DeletePropertyButton/DeletePropertyButton";
 
 
 interface PropertyCardProps {
@@ -15,7 +16,7 @@ export const PropertyCard: FC<PropertyCardProps> = ({ property }) => {
           <Stack spacing={2}>
             <HStack justify="space-between">
               <Text size="sm">{property.title}</Text>
-              {/* <DeletePropertyButton id={property.id} /> */}
+              <DeletePropertyButton id={property.id} />
             </HStack>
             <HStack align="stretch">
               <Box position="relative" width={120}>
