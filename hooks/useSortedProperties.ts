@@ -3,10 +3,12 @@ import { useContext } from "react";
 import { useProperties } from "./useProperties";
 import { SearchContext } from "@/context/searchContext";
 import { SortOption, SortOrder } from "@/interfaces/SortTypes";
+import { FilterContext } from "@/context/filterContext";
 
 export const useSortedProperties = () => {
     const { sort } = useContext(SortContext);
     const { search } = useContext(SearchContext);
+    const { filter } = useContext(FilterContext)
     const { properties, isError, isLoading } = useProperties();
 
 
@@ -21,6 +23,14 @@ export const useSortedProperties = () => {
             }
             return true;
         })
+        .filter((property) => {
+            if (filter) {
+              return property.type
+                .toLowerCase()
+                .includes(filter.toLowerCase());
+            }
+            return true;
+          })
 
 
     // ------------- Sort -----------------------
