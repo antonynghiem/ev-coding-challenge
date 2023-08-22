@@ -10,7 +10,7 @@ import { useSortedProperties } from "@/hooks/useSortedProperties";
   interface PropertyListProps {}
   
   export const PropertyList: FC<PropertyListProps> = () => {
-    const { properties, isError, isLoading } = useSortedProperties();
+    const { sortFilteredProperties, isError, isLoading } = useSortedProperties();
   
     if (isLoading) return(
       <SimpleGrid
@@ -30,7 +30,7 @@ import { useSortedProperties } from "@/hooks/useSortedProperties";
         spacing={4}
         templateColumns='repeat(auto-fill, minmax(360px, 1fr))'
       >
-        {properties?.map((property) => (
+        {sortFilteredProperties?.map((property) => (
           <PropertyCard key={property.id} property={property} />
         ))}
       </SimpleGrid>

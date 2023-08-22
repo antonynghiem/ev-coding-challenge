@@ -2,42 +2,42 @@ import { SortContext } from "@/context/sortContext";
 import { useContext } from "react";
 import { useProperties } from "./useProperties";
 import { SearchContext } from "@/context/searchContext";
+import { SortOption, SortOrder } from "@/interfaces/SortTypes";
 
 export const useSortedProperties = () => {
     const { sort } = useContext(SortContext);
     const { search } = useContext(SearchContext);
     const { properties, isError, isLoading } = useProperties();
 
+
+    // ------------- Search & Filter -----------------------
+    const sortFilteredProperties =
+        properties &&
+        properties.filter((property) => {
+            if (search) {
+              return property.title
+                ? property.title.toLowerCase().includes(search.toLowerCase())
+                : false;
+            }
+            return true;
+        })
+
+
     // ------------- Sort -----------------------
-    if (sort.key === 'name') {
-        properties?.sort((a, b) => {
-            if (!a.name && !b.name) {
-                return 0;
-            }
-            if (!a.name) {
-                return 1;
-            }
-            if (!b.name) {
-                return -1;
-            }
-            return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+    if (sort.key === SortOption.title) {
+        sortFilteredProperties?.sort((a, b) => {
+            return a.title.toLowerCase().localeCompare(b.title.toLowerCase());
         });
     }
 
-    if (sort.key === 'price') {
-        properties?.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+    if (sort.key === SortOption.price) {
+        sortFilteredProperties?.sort((a, b) => parseFloat(a.price.toString()) - parseFloat(b.price.toString()));
     }
 
-    if (sort.order === 'desc') properties?.reverse();
-    
-    // ------------- Search -----------------------
-
-
-    // ------------- Filter -----------------------
-    
+    if (sort.order === SortOrder.desc) sortFilteredProperties?.reverse();
 
     return {
-        properties,
+        sortFilteredProperties,
         isError,
         isLoading,
     };

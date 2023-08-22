@@ -13,8 +13,8 @@ export const SortSelect: FC = () => {
             onChange={(e) => setSort(JSON.parse(e.target.value))}>
                 <option value={JSON.stringify({ key: SortOption.price, order: SortOrder.desc })}>Price Descending</option>
                 <option value={JSON.stringify({ key: SortOption.price, order: SortOrder.asc })}>Price Ascending</option>
-                <option value={JSON.stringify({ key: SortOption.name, order: SortOrder.desc })}>Name Descending</option>
-                <option value={JSON.stringify({ key: SortOption.name, order: SortOrder.asc })}>Name Ascending</option>
+                <option value={JSON.stringify({ key: SortOption.title, order: SortOrder.desc })}>Title Descending</option>
+                <option value={JSON.stringify({ key: SortOption.title, order: SortOrder.asc })}>Title Ascending</option>
         </Select> 
     );
 }

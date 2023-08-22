@@ -10,9 +10,11 @@ export const useProperties = () => {
         process.env.NEXT_PUBLIC_API_URL+'/properties',
         fetcher
     );
+
+    const filteredProperties = data?.filter((property) => !!property.price);
     
     return {
-        properties: data,
+        properties: filteredProperties,
         isError: error,
         isLoading,
     };
