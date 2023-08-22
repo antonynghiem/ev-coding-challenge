@@ -1,5 +1,6 @@
 import { Button, useDisclosure } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
+import { AddPropertyFormDrawer } from "../AddPropertyFormDrawer/AddPropertyFormDrawer";
 
 export const AddPropertyButton = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -15,7 +16,7 @@ export const AddPropertyButton = () => {
       >
         Add Property
       </Button>
-      {/* <AddPropertyDrawer isOpen={isOpen} onClose={onClose} /> */}
+      <AddPropertyFormDrawer isOpen={isOpen} onClose={onClose} />
     </>
   );
 };
